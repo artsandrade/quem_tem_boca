@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d755925991a3a287735a52b96f8d5e5",
+    "content-hash": "f652fb5177ee4b246111463c0d62d7c7",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2342,61 +2342,6 @@
                 }
             ],
             "time": "2022-07-30T15:51:26+00:00"
-        },
-        {
-            "name": "phpsquad/domain-maker",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpsquad/domain-maker.git",
-                "reference": "42151b5a48a0ba2b7d76cefccdf38e51529f16d1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpsquad/domain-maker/zipball/42151b5a48a0ba2b7d76cefccdf38e51529f16d1",
-                "reference": "42151b5a48a0ba2b7d76cefccdf38e51529f16d1",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^7.0|^8.0|^9.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.0"
-            },
-            "type": "package",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "PhpSquad\\DomainMaker\\DomainMakerServiceProvider",
-                        "PhpSquad\\DomainMaker\\DomainRouteServiceProvider",
-                        "PhpSquad\\DomainMaker\\ViewProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpSquad\\DomainMaker\\": "./src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Richard Rohrig",
-                    "email": "rick@wambo.com"
-                }
-            ],
-            "description": "Domain Driven Design for Laravel made easy",
-            "keywords": [
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/phpsquad/domain-maker/issues",
-                "source": "https://github.com/phpsquad/domain-maker/tree/v1.0.0"
-            },
-            "time": "2022-04-22T18:21:19+00:00"
         },
         {
             "name": "psr/container",
