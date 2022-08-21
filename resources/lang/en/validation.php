@@ -129,6 +129,7 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    'celular_com_ddd' => 'The :attribute is not a valid phone.',
 
     /*
     |--------------------------------------------------------------------------
