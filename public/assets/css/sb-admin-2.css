@@ -2357,34 +2357,34 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #8F1E1B;
+  border-color: #8F1E1B;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #2e59d9;
-  border-color: #2653d4;
+  background-color: #8F1E1B;
+  border-color: #8F1E1B;
 }
 
 .btn-primary:focus, .btn-primary.focus {
   color: #fff;
-  background-color: #2e59d9;
-  border-color: #2653d4;
+  background-color: #8F1E1B;
+  border-color: #8F1E1B;
   box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #8F1E1B;
+  border-color: #8F1E1B;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #2653d4;
-  border-color: #244ec9;
+  background-color: #8F1E1B;
+  border-color: #8F1E1B;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -11278,4 +11278,30 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
+}
+
+.card-categories{
+  cursor: pointer;
+  transition:.3s;
+}
+
+.card-categories:hover{
+  transform:scale(1.1);
+}
+
+.card-body-categories{
+  margin: auto;
+}
+
+.card-restaurants{
+  cursor: pointer;
+  transition:.3s;
+}
+
+.card-restaurants:hover{
+  transform:scale(1.05);
+}
+
+.card-body-restaurants{
+  margin: auto;
 }
