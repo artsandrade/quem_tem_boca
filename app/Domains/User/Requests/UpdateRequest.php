@@ -28,7 +28,7 @@ class UpdateRequest extends FormRequest
     return [
       'name' => 'sometimes|required|max:100',
       'email' => 'sometimes|required|max:255|email|unique:users,email,NULL,id,deleted_at,NULL',
-      'password'=>'sometimes|required|max:255',
+      'password'=>'sometimes|required|min:6|max:255',
       'phone' => 'sometimes|required|celular_com_ddd',
     ];
   }

@@ -8,7 +8,7 @@ class MenuCategoryRepository
 {
   public function getAll(string $restaurant_id)
   {
-    return MenuCategory::where('restaurant_id', $restaurant_id)->paginate();
+    return MenuCategory::where('restaurant_id', $restaurant_id)->get();
   }
 
   public function getByName(string $restaurant_id, string $name)

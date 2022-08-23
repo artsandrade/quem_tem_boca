@@ -8,7 +8,8 @@ Route::group([
   'prefix' => 'api/v1',
   'middleware' => 'jwt',
 ], function () {
-  Route::get('restaurant/{restaurant_id}/category/{menu_category_id}/items', [MenuItemController::class, 'getAll']);
+  Route::get('items-by-name', [MenuItemController::class, 'getAllByItem']);
+  Route::get('restaurant/{restaurant_id}/items', [MenuItemController::class, 'getAll']);
   Route::post('restaurant/{restaurant_id}/category/{menu_category_id}/item', [MenuItemController::class, 'create']);
   Route::get('restaurant/{restaurant_id}/category/{menu_category_id}/item/{id}', [MenuItemController::class, 'get']);
   Route::patch('restaurant/{restaurant_id}/category/{menu_category_id}/item/{id}', [MenuItemController::class, 'update']);

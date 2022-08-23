@@ -28,6 +28,7 @@ class UpdateRequest extends FormRequest
     $id = $this->route()->parameter('id');
 
     return [
+      'category' => 'sometimes|required|uuid|exists:categories,id',
       'name' => 'sometimes|required|max:100',
       'corporate_name' => 'sometimes|required|max:100',
       'document' => 'sometimes|required|max:15|unique:restaurants,document,' . $id . ',id,deleted_at,NULL',
@@ -37,9 +38,9 @@ class UpdateRequest extends FormRequest
       'complement' => 'nullable|max:100',
       'neighborhood' => 'sometimes|required|max:30',
       'city' => 'sometimes|required|max:50',
-      'state' => 'nullable|max:3',
+      'state' => 'sometimes|required|uf',
       'delivery_time' => 'sometimes|required|integer',
-      'delivery_fee' => 'sometimes|required'
+      'delivery_fee' => 'sometimes|required|regex:/^[0-9]{1,3}([.]([0-9]{3}))*[,]([.]{0})[0-9]{0,2}$/'
     ];
   }
 

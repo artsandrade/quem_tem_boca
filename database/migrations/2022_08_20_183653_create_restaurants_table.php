@@ -15,6 +15,8 @@ class CreateRestaurantsTable extends Migration
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('file_id');
+            $table->uuid('category_id');
             $table->string('name', 100);
             $table->string('corporate_name', 100);
             $table->string('document', 15)->unique();
@@ -32,6 +34,10 @@ class CreateRestaurantsTable extends Migration
             $table->boolean('status')->default(1);
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+
         });
     }
 

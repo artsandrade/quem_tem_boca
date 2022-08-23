@@ -2,6 +2,9 @@
 
 namespace App\Domains\Restaurant\Resources;
 
+use App\Domains\Category\Resources\CategoryResource;
+use App\Domains\File\Resources\FileResource;
+use App\Support\Mask\Mask;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RestaurantResource extends JsonResource
@@ -14,6 +17,12 @@ class RestaurantResource extends JsonResource
    */
   public function toArray($request)
   {
+    $delivery_fee = 0;
+    if(!empty($this->delivery_fee)){
+      $mask = new Mask();
+      $delivery_fee = $mask->toNumberHtml($this->delivery_fee);
+    }
+
     $data = [
       'id' => $this->id,
       'name' => $this->name,
@@ -29,18 +38,26 @@ class RestaurantResource extends JsonResource
       'latitude' => $this->latitude,
       'longitude' => $this->longitude,
       'delivery_time' => $this->delivery_time,
-      'delivery_fee' => $this->delivery_fee,
+      'delivery_fee' => $delivery_fee,
       'status' =>  (bool) $this->status,
       'created_at' => (string) $this->created_at,
       'updated_at' => (string) $this->updated_at,
     ];
 
     if ($restaurant_phone = $this->whenLoaded('restaurant_phone')) {
-      $data['phone'] = new RestaurantPhoneResource($restaurant_phone);
+      $data['phone'] = RestaurantPhoneResource::collection($restaurant_phone);
     }
 
-    if (isset($this->restaurant_business_hour) && !$this->restaurant_business_hour->isEmpty()) {
-      $data['business_hour'] = new RestaurantBusinessHourResource($this->restaurant_business_hour);
+    if ($restaurant_business_hour = $this->whenLoaded('restaurant_business_hour')) {
+      $data['business_hour'] = RestaurantBusinessHourResource::collection($restaurant_business_hour);
+    }
+
+    if ($category = $this->whenLoaded('category')) {
+      $data['category'] = new CategoryResource($category);
+    }
+
+    if ($file = $this->whenLoaded('file')) {
+      $data['file'] = new FileResource($file);
     }
 
     return $data;

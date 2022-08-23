@@ -2,6 +2,8 @@
 
 namespace App\Domains\Restaurant\Models;
 
+use App\Domains\Category\Models\Category;
+use App\Domains\File\Models\File;
 use App\Domains\Menu\Models\MenuCategory;
 use App\Domains\Menu\Models\MenuItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,6 +27,8 @@ class Restaurant extends Model
    * @var array<int, string>
    */
   protected $fillable = [
+    'file_id',
+    'category_id',
     'name',
     'corporate_name',
     'document',
@@ -51,6 +55,16 @@ class Restaurant extends Model
     });
   }
 
+  public function category()
+  {
+    return $this->belongsTo(Category::class, 'category_id');
+  }
+
+  public function file()
+  {
+    return $this->belongsTo(File::class, 'file_id');
+  }
+
   public function menu_item()
   {
     return $this->hasMany(MenuItem::class, 'restaurant_id');
@@ -60,7 +74,7 @@ class Restaurant extends Model
   {
     return $this->hasMany(MenuCategory::class, 'restaurant_id');
   }
-  
+
   public function restaurant_phone()
   {
     return $this->hasMany(RestaurantPhone::class, 'restaurant_id');

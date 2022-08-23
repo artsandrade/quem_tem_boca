@@ -8,7 +8,7 @@ class UserRepository
 {
   public function getAll()
   {
-    return User::paginate();
+    return User::all();
   }
 
   public function create(array $data)

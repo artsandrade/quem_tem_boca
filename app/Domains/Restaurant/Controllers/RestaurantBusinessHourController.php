@@ -16,7 +16,7 @@ class RestaurantBusinessHourController extends Controller
   {
     $restaurantBusinessHours = new RestaurantActions\GetAllBusinessHours($restaurant_id);
 
-    return new RestaurantBusinessHourResource($restaurantBusinessHours->execute());
+    return RestaurantBusinessHourResource::collection($restaurantBusinessHours->execute());
   }
 
   public function create(RestaurantRequests\CreateRestaurantBusinessHourRequest $request, string $restaurant_id)

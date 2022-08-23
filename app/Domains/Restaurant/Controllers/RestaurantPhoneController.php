@@ -16,7 +16,7 @@ class RestaurantPhoneController extends Controller
   {
     $restaurantPhones = new RestaurantActions\GetAllPhones($restaurant_id);
 
-    return new RestaurantPhoneResource($restaurantPhones->execute());
+    return RestaurantPhoneResource::collection($restaurantPhones->execute());
   }
 
   public function create(RestaurantRequests\CreateRestaurantPhoneRequest $request, string $restaurant_id)

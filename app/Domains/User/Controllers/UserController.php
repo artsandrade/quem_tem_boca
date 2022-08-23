@@ -16,7 +16,7 @@ class UserController extends Controller
   {
     $users = new UserActions\GetAll();
 
-    return new UserResource($users->execute());
+    return UserResource::collection($users->execute());
   }
 
   public function create(UserRequests\CreateRequest $request)

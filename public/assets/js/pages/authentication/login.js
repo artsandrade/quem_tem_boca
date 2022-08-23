@@ -33,8 +33,8 @@ function login() {
     },
     success: function (json, textStatus, jqXHR) {
       if (jqXHR.status === 200) {
-        document.cookie = `access_token=${json.access_token}`;
-        document.cookie = `user=${JSON.stringify(json.user)}`;
+        setCookie('access_token', json.access_token);
+        setCookie('user', JSON.stringify(json.user));
 
         location.href = API_URL;
       }

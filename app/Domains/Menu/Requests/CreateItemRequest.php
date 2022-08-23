@@ -26,6 +26,7 @@ class CreateItemRequest extends FormRequest
   public function rules()
   {
     return [
+      'image' => 'required|image',
       'name' => 'required|max:100',
       'description' => 'required|max:100',
       'price' => 'required|numeric',

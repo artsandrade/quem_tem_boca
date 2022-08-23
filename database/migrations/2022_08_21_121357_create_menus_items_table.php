@@ -15,6 +15,7 @@ class CreateMenusItemsTable extends Migration
     {
         Schema::create('menus_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('file_id');
             $table->uuid('restaurant_id');
             $table->uuid('menu_category_id');
             $table->string('name', 100);
@@ -24,6 +25,7 @@ class CreateMenusItemsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
+            $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->foreign('menu_category_id')->references('id')->on('menus_categories')->onDelete('cascade');
         });

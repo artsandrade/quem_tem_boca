@@ -8,7 +8,7 @@ class RestaurantBusinessHourRepository
 {
   public function getAll(string $restaurant_id)
   {
-    return RestaurantBusinessHour::where('restaurant_id', $restaurant_id)->paginate();
+    return RestaurantBusinessHour::where('restaurant_id', $restaurant_id)->get();
   }
 
   public function create(array $data)

@@ -27,7 +27,7 @@ class RestaurantPhoneResource extends JsonResource
     ];
 
     if ($restaurant = $this->whenLoaded('restaurant')) {
-      $data['restaurant'] = new RestaurantResource($restaurant);
+      $data['restaurant'] = RestaurantResource::collection($restaurant);
     }
 
     return $data;

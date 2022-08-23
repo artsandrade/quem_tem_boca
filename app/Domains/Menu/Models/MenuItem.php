@@ -2,6 +2,7 @@
 
 namespace App\Domains\Menu\Models;
 
+use App\Domains\File\Models\File;
 use App\Domains\Restaurant\Models\Restaurant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -39,6 +40,11 @@ class MenuItem extends Model
     static::creating(function (Model $model) {
       $model->setAttribute('id', Str::uuid()->toString());
     });
+  }
+
+  public function file()
+  {
+    return $this->belongsTo(File::class, 'file_id');
   }
 
   public function menu_category()

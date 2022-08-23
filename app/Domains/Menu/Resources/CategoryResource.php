@@ -27,6 +27,10 @@ class CategoryResource extends JsonResource
       $data['restaurant'] = new RestaurantResource($restaurant);
     }
 
+    if ($menu_item = $this->whenLoaded('menu_item')) {
+      $data['menu_item'] = ItemResource::collection($menu_item);
+    }
+
     return $data;
   }
 }

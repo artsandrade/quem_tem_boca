@@ -26,6 +26,8 @@ class CreateRequest extends FormRequest
   public function rules()
   {
     return [
+      'logo' => 'required|image',
+      'category' => 'required|uuid|exists:categories,id',
       'name' => 'required|max:100',
       'corporate_name' => 'required|max:100',
       'document' => 'required|max:15|unique:restaurants,document,NULL,id,deleted_at,NULL',
@@ -35,12 +37,12 @@ class CreateRequest extends FormRequest
       'complement' => 'nullable|max:100',
       'neighborhood' => 'required|max:30',
       'city' => 'required|max:50',
-      'state' => 'nullable|max:3',
+      'state' => 'required|uf',
       'delivery_time' => 'required|integer',
-      'delivery_fee' => 'required',
+      'delivery_fee' => 'required|regex:/^[0-9]{1,3}([.]([0-9]{3}))*[,]([.]{0})[0-9]{0,2}$/',
       'user_name' => 'required|max:100',
       'user_email' => 'required|max:255|email|unique:users,email,NULL,id,deleted_at,NULL',
-      'user_password'=>'required|max:255',
+      'user_password' => 'required|min:6|max:255',
       'user_phone' => 'required|celular_com_ddd',
     ];
   }

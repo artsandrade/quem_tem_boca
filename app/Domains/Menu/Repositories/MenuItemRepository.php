@@ -3,15 +3,20 @@
 namespace App\Domains\Menu\Repositories;
 
 use App\Domains\Menu\Models\MenuItem;
+use Illuminate\Support\Facades\Hash;
 
 class MenuItemRepository
 {
-  public function getAll(string $restaurant_id, string $menu_category_id)
+  public function getAll(string $restaurant_id)
   {
     return MenuItem::where([
       'restaurant_id' => $restaurant_id,
-      'menu_category_id' => $menu_category_id,
-    ])->paginate();
+    ])->with(['menu_category', 'file'])->orderBy('menu_category_id')->orderBy('name')->get();
+  }
+
+  public function getAllByItem(?string $name)
+  {
+    return MenuItem::where('name', 'like', '%' . $name . '%')->with(['menu_category', 'file', 'restaurant', 'restaurant.file', 'restaurant.category'])->groupBy('id')->get();
   }
 
   public function getByName(string $restaurant_id, string $menu_category_id, string $name)
@@ -34,7 +39,7 @@ class MenuItemRepository
       'id' => $id,
       'restaurant_id' => $restaurant_id,
       'menu_category_id' => $menu_category_id,
-      ])->first();
+    ])->first();
   }
 
   public function update(array $data)

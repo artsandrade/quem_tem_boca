@@ -2,6 +2,7 @@
 
 namespace App\Domains\Restaurant\Resources;
 
+use App\Support\Mask\Mask;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RestaurantBusinessHourResource extends JsonResource
@@ -14,17 +15,20 @@ class RestaurantBusinessHourResource extends JsonResource
    */
   public function toArray($request)
   {
+    $weekday = new Mask();
+
     $data = [
       'id' => $this->id,
       'weekday' => $this->weekday,
-      'from' => (string) $this->from,
-      'to' => (string) $this->to,
+      'weekday_pt' => $weekday->toWeekdayPt($this->weekday),
+      'from' => date('H:i', strtotime($this->from)),
+      'to' => date('H:i', strtotime($this->to)),
       'created_at' => (string) $this->created_at,
       'updated_at' => (string) $this->updated_at,
     ];
 
     if ($restaurant = $this->whenLoaded('restaurant')) {
-      $data['restaurant'] = new RestaurantResource($restaurant);
+      $data['restaurant'] = RestaurantResource::collection($restaurant);
     }
 
     return $data;

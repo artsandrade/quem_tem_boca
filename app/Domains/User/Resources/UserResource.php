@@ -30,11 +30,11 @@ class UserResource extends JsonResource
     ];
 
     if ($restaurant = $this->whenLoaded('restaurant')) {
-      $data['restaurant'] = new RestaurantResource($restaurant);
+      $data['restaurant'] = RestaurantResource::collection($restaurant);
     }
 
     if ($user_address = $this->whenLoaded('user_address')) {
-      $data['addresses'] = new UserAddressResource($user_address);
+      $data['addresses'] = UserAddressResource::collection($user_address);
     }
 
     return $data;

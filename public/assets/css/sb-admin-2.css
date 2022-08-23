@@ -9899,6 +9899,13 @@ a:focus {
   animation-timing-function: opacity cubic-bezier(0, 1, 0.4, 1);
 }
 
+.bg-gradient-default {
+  background-color: #8F1E1B;
+  background-image: linear-gradient(180deg, #8F1E1B 10%, #8F1E1B 100%);
+  background-size: cover;
+  background: url('../img/background.png');
+}
+
 .bg-gradient-primary {
   background-color: #4e73df;
   background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
@@ -10860,10 +10867,16 @@ a:focus {
   }
 }
 
-.bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+/* .bg-login-image {
+  background: url("../img/background-login.png");
   background-position: center;
   background-size: cover;
+} */
+.bg-login-image {
+  background: url('../img/logo-dark-800-600.svg');
+  background-position: center;
+  background-size: 80%;
+  background-repeat: no-repeat;
 }
 
 .bg-register-image {

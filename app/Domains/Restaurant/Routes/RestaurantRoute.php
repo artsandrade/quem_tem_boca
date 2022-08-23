@@ -12,6 +12,8 @@ Route::group([
 
   Route::middleware('jwt')->group(function () {
     Route::get('restaurants', [RestaurantController::class, 'getAll']);
+    Route::get('restaurants-by-category', [RestaurantController::class, 'getAllByCategory']);
+    Route::get('restaurants-by-name', [RestaurantController::class, 'getAllByName']);
     Route::get('restaurant/{id}', [RestaurantController::class, 'get']);
     Route::patch('restaurant/{id}', [RestaurantController::class, 'update']);
     Route::delete('restaurant/{id}', [RestaurantController::class, 'delete']);

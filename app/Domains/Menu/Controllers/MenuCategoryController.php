@@ -16,7 +16,7 @@ class MenuCategoryController extends Controller
   {
     $categories = new CategoryActions\GetAllCategories($restaurant_id);
 
-    return new CategoryResource($categories->execute());
+    return CategoryResource::collection($categories->execute());
   }
 
   public function create(CategoryRequests\CreateCategoryRequest $request, string $restaurant_id)

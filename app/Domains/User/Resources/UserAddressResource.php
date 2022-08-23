@@ -34,7 +34,7 @@ class UserAddressResource extends JsonResource
     ];
 
     if ($user = $this->whenLoaded('user')) {
-      $data['user'] = new UserResource($user);
+      $data['user'] = UserResource::collection($user);
     }
 
     return $data;

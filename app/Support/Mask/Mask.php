@@ -67,4 +67,48 @@ class Mask
     $value = trim(strtoupper($value));
     return $value;
   }
+
+  public static function toNumberDb($number)
+  {
+    $number = str_replace(".", "", $number);
+    $number = str_replace(",", ".", $number);
+    return $number;
+  }
+
+  public static function toNumberHtml($number)
+  {
+    return number_format($number, 2, ",", "");
+  }
+
+  public static function toWeekdayPt(string $weekday)
+  {
+    switch ($weekday) {
+      case 'sunday':
+        $weekday = 'Domingo';
+        break;
+      case 'monday':
+        $weekday = 'Segunda-feira';
+        break;
+      case 'tuesday':
+        $weekday = 'Terça-feira';
+        break;
+      case 'wednesday':
+        $weekday = 'Quarta-feira';
+        break;
+      case 'thursday':
+        $weekday = 'Quinta-feira';
+        break;
+      case 'friday':
+        $weekday = 'Sexta-feira';
+        break;
+      case 'saturday':
+        $weekday = 'Sábado';
+        break;
+      default:
+        $weekday = 'Domingo';
+        break;
+    }
+
+    return $weekday;
+  }
 }

@@ -8,7 +8,7 @@ class RestaurantPhoneRepository
 {
   public function getAll(string $restaurant_id)
   {
-    return RestaurantPhone::where('restaurant_id', $restaurant_id)->paginate();
+    return RestaurantPhone::where('restaurant_id', $restaurant_id)->get();
   }
 
   public function getByNumber(string $restaurant_id, string $number)

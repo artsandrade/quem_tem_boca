@@ -4,6 +4,8 @@ namespace App\Domains\Restaurant\Controllers;
 
 use App\Domains\Restaurant\Actions as RestaurantActions;
 use App\Domains\Restaurant\Requests as RestaurantRequests;
+use App\Domains\Restaurant\Requests\GetAllByCategoryRequest;
+use App\Domains\Restaurant\Requests\GetAllByNameRequest;
 use App\Domains\Restaurant\Resources\RestaurantResource;
 use App\Http\Controllers\Controller;
 use App\Traits\HttpResponse;
@@ -16,14 +18,28 @@ class RestaurantController extends Controller
   {
     $restaurants = new RestaurantActions\GetAll();
 
-    return new RestaurantResource($restaurants->execute());
+    return RestaurantResource::collection($restaurants->execute());
+  }
+
+  public function getAllByCategory(GetAllByCategoryRequest $request)
+  {
+    $restaurants = new RestaurantActions\GetAllByCategory($request->category);
+
+    return RestaurantResource::collection($restaurants->execute());
+  }
+
+  public function getAllByName(GetAllByNameRequest $request)
+  {
+    $restaurants = new RestaurantActions\GetAllByName($request->name);
+
+    return RestaurantResource::collection($restaurants->execute());
   }
 
   public function create(RestaurantRequests\CreateRequest $request)
   {
     $data = $request->all();
 
-    $restaurant = new RestaurantActions\Create($data);
+    $restaurant = new RestaurantActions\Create($data, $request);
 
     return new RestaurantResource($restaurant->execute());
   }

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="Quem tem boca é um MVP desenvolvido para demonstrar as habilidades técnicas do desenvolvedor.">
+  <meta name="author" content="Arthur Souza Andrade">
   <link rel="shortcut icon" href="{{asset('assets/img/favicon.ico')}}" />
 
   <title>Quem Tem Boca</title>
@@ -20,6 +20,9 @@
   <link href="{{asset('assets/css/sb-admin-2.css')}}" rel="stylesheet">
 
 </head>
+@php
+$user = json_decode($_COOKIE['user']);
+@endphp
 
 <body id="page-top">
 
@@ -44,18 +47,18 @@
           </button> -->
 
           <!-- Sidebar - Brand -->
-          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('restaurants')}}">
             <div class="sidebar-brand-icon">
               <img src="{{asset('assets/img/logo.svg')}}" alt="" style="max-width: 10%;">
             </div>
           </a>
 
           <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="javascript:void(0);">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Busque por item ou restaurante..." aria-label="Search" aria-describedby="basic-addon2">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Busque por item ou restaurante..." aria-label="Search" aria-describedby="basic-addon2" id="searchValue1">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="button" onclick="validateOriginSearch($('#searchValue1').val())">
                   <i class="fas fa-search fa-sm"></i>
                 </button>
               </div>
@@ -72,11 +75,11 @@
               </a>
               <!-- Dropdown - Messages -->
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
+                <form class="form-inline mr-auto w-100 navbar-search" action="javascript:void(0);">
                   <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Busque por item ou restaurante..." aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control bg-light border-0 small searchByRestaurantOrItem" placeholder="Busque por item ou restaurante..." aria-label="Search" aria-describedby="basic-addon2" id="searchValue2">
                     <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
+                      <button class="btn btn-primary" type="button" onclick="validateOriginSearch($('#searchValue2').val())">
                         <i class="fas fa-search fa-sm"></i>
                       </button>
                     </div>
@@ -90,27 +93,19 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$user->name}}</span>
+                <img class="img-profile rounded-circle" src="{{asset('assets/img/user.png')}}">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
+                  Perfil
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  Sair
                 </a>
               </div>
             </li>
@@ -157,15 +152,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Sair</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Ao clicar em sair, sua sessão será encerrada.</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <button class="btn btn-primary" id="btn_logout" onclick="logout()">Sair</button>
         </div>
       </div>
     </div>
@@ -180,9 +175,11 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{{asset('assets/js/sb-admin-2.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/toastr/toastr.min.js')}}"></script>
+  <script src="{{asset('assets/js/functions.js')}}"></script>
 
   <!-- Page level custom scripts -->
-  <script src="{{asset('assets/js/pages/restaurant/index.js')}}"></script>
+  @yield('import_scripts')
 
 </body>
 

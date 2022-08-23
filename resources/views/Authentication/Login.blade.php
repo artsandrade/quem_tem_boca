@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="Quem tem boca é um MVP desenvolvido para demonstrar as habilidades técnicas do desenvolvedor.">
+  <meta name="author" content="Arthur Souza Andrade">
+  <link rel="shortcut icon" href="{{asset('assets/img/favicon.ico')}}" />
 
   <title>Quem Tem Boca</title>
 
@@ -16,13 +17,13 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="{{asset('assets/css/sb-admin-2.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/css/sb-admin-2.css')}}" rel="stylesheet">
 
   <!-- Toastr Css-->
   <link href="{{asset('assets/vendor/toastr/toastr.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-default">
 
   <div class="container">
 

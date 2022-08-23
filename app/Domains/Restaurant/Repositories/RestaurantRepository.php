@@ -8,7 +8,19 @@ class RestaurantRepository
 {
   public function getAll()
   {
-    return Restaurant::paginate();
+    return Restaurant::with(['category', 'file'])->get();
+  }
+
+  public function getAllByCategory(string $category)
+  {
+    return Restaurant::with(['category', 'file'])->whereHas('category', function ($query) use ($category) {
+      return $query->where('name', '=', $category);
+    })->get();
+  }
+
+  public function getAllByName(?string $name)
+  {
+    return Restaurant::with(['category', 'file'])->where('name', 'like', '%' . $name . '%')->get();
   }
 
   public function create(array $data)
@@ -18,7 +30,7 @@ class RestaurantRepository
 
   public function get(string $id)
   {
-    return(Restaurant::with('restaurant_business_hour')->where('id', $id)->first());
+    return (Restaurant::with(['category', 'file', 'restaurant_business_hour', 'restaurant_phone'])->where('id', $id)->first());
   }
 
   public function getByDocument(string $document)

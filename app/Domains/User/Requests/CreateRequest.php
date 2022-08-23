@@ -28,7 +28,7 @@ class CreateRequest extends FormRequest
     return [
       'name' => 'required|max:100',
       'email' => 'required|max:255|email|unique:users,email,NULL,id,deleted_at,NULL',
-      'password'=>'required|max:255',
+      'password'=>'required|min:6|max:255',
       'phone' => 'required|celular_com_ddd',
     ];
   }
